@@ -1,17 +1,15 @@
-from flask import Flask
 from flask_cors import CORS
 from services.presentService import getPresents
+from main import start
 
-app = Flask(__name__)
+app = start()
 CORS(app)
-
-presents = getPresents()
 
 @app.get('/presents')
 
 @app.route('/presents/Get')
 def Hi():
-    return presents
+    return getPresents()
 
 #getbyId
 #delete
