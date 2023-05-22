@@ -1,10 +1,11 @@
-from flask import Flask, request
+from flask import Flask
 from flask_cors import CORS
+from services.presentService import getPresents
 
 app = Flask(__name__)
 CORS(app)
 
-presents = ['lego', 'flowers', 'dragon']
+presents = getPresents()
 
 @app.get('/presents')
 

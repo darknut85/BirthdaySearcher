@@ -1,0 +1,6 @@
+{
+    "python.analysis.extraPaths": [
+        "./bday-present/python/server",
+        "./bday-present/python/services"
+    ]
+}
