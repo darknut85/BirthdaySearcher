@@ -28,6 +28,13 @@ def DeletePresents():
     cursor.execute('DELETE from presents WHERE id = 2')
     conn.commit()
 
+def UpdatePresents():
+    conn = ConnectionString.returnConn()
+    conn.autocommit = True
+    cursor = conn.cursor()
+    cursor.execute('UPDATE presents SET name = %s WHERE id = %s',('Car', 1))
+    conn.commit()
+
 def getPresents():
     return GetPresents()
 
@@ -36,3 +43,6 @@ def addPresents():
 
 def deletePresents():
     DeletePresents()
+
+def updatePresents():
+    UpdatePresents()
