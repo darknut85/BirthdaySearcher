@@ -1,13 +1,21 @@
 import json
+from config import ConnectionString
 from objects.present import Present
 
-p1 = Present('1', 'Lego', 'Holly')
-p2 = Present('2' ,'Flowers' , 'Diego')
-p3 = Present('3', 'Dragon', 'Sandy')
+def GetPresents():
+    conn = ConnectionString.returnConn()
+    conn.autocommit = True
+    cursor = conn.cursor()
+    cursor.execute('''SELECT * from presents''')
 
-dd = json.dumps(p1)
+    result = cursor.fetchall()
+    print(result)
 
-presents = dd
+    conn.commit()
+    conn.close()
+    return result
+
+presents = GetPresents()
 
 def getPresents():
     return presents
