@@ -15,6 +15,18 @@ def GetPresents():
     conn.commit()
     return results
 
+def GetPresentById():
+    query = "SELECT * from presents WHERE id = %s"
+    recordsToInsert = ('2')
+
+    cursor.execute(query, recordsToInsert)
+
+    columns = cursor.description
+    results = [{columns[index][0]:column for index, column in enumerate(value)} for value in cursor.fetchall()]
+    print(results)
+    conn.commit()
+    return results
+
 def AddPresents():
 
     query = "INSERT INTO presents(ID, NAME, OWNER) VALUES(%s, %s, %s)"
@@ -30,10 +42,6 @@ def DeletePresents():
     conn.commit()
 
 def UpdatePresents():
-    conn = ConnectionString.returnConn()
-    conn.autocommit = True
-    cursor = conn.cursor()
-
     recordsToInsert = ('Car', '2')
     query = "UPDATE presents SET name = %s WHERE id = %s"
     cursor.execute(query, recordsToInsert)
@@ -43,6 +51,9 @@ def UpdatePresents():
 
 def getPresents():
     return GetPresents()
+
+def getPresentById():
+    return GetPresentById()
 
 def addPresents():
     AddPresents()

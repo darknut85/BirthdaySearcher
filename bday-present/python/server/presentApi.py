@@ -1,5 +1,5 @@
 from flask_cors import CORS
-from services.presentService import addPresents, getPresents, deletePresents, updatePresents
+from services.presentService import addPresents, getPresents, deletePresents, updatePresents, getPresentById
 from main import start
 
 app = start()
@@ -10,6 +10,10 @@ CORS(app)
 @app.route('/presents/Get')
 def Get():
     return getPresents()
+
+@app.route('/presents/GetById')
+def GetById():
+    return getPresentById()
 
 @app.route('/presents/Add')
 def Add():
