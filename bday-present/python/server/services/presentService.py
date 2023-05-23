@@ -1,9 +1,10 @@
 from config import ConnectionString
 
+conn = ConnectionString.returnConn()
+conn.autocommit = True
+cursor = conn.cursor()
+
 def GetPresents():
-    conn = ConnectionString.returnConn()
-    conn.autocommit = True
-    cursor = conn.cursor()
 
     query = '''SELECT * from presents'''
     cursor.execute(query)
@@ -15,9 +16,6 @@ def GetPresents():
     return results
 
 def AddPresents():
-    conn = ConnectionString.returnConn()
-    conn.autocommit = True
-    cursor = conn.cursor()
 
     query = "INSERT INTO presents(ID, NAME, OWNER) VALUES(%s, %s, %s)"
     recordsToInsert = (2, 'Flower', 'Isaac')
@@ -25,9 +23,6 @@ def AddPresents():
     conn.commit()
 
 def DeletePresents():
-    conn = ConnectionString.returnConn()
-    conn.autocommit = True
-    cursor = conn.cursor()
 
     recordsToInsert = ('2')
     query = "DELETE from presents WHERE id = %s"
@@ -44,7 +39,7 @@ def UpdatePresents():
     cursor.execute(query, recordsToInsert)
     conn.commit()
 
-    
+
 
 def getPresents():
     return GetPresents()
