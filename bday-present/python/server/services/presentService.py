@@ -8,14 +8,15 @@ def GetPresents():
     cursor = conn.cursor()
     cursor.execute('''SELECT * from presents''')
 
-    result = cursor.fetchall()
-    print(result)
+    columns = cursor.description
+    results = [{columns[index][0]:column for index, column in enumerate(value)} for value in cursor.fetchall()]
 
     conn.commit()
     conn.close()
-    return result
+    return results
 
-presents = GetPresents()
+presents: Present = GetPresents()
+#p3 = Present('3', 'Dragon', 'Sandy')
 
 def getPresents():
     return presents
