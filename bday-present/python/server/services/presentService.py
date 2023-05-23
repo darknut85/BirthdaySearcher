@@ -21,8 +21,18 @@ def GetPresents():
     conn.commit()
     return results
 
+def DeletePresents():
+    conn = ConnectionString.returnConn()
+    conn.autocommit = True
+    cursor = conn.cursor()
+    cursor.execute('DELETE from presents WHERE id = 2')
+    conn.commit()
+
 def getPresents():
     return GetPresents()
 
 def addPresents():
     AddPresents()
+
+def deletePresents():
+    DeletePresents()
