@@ -1,4 +1,3 @@
-import json
 from config import ConnectionString
 from objects.present import Present
 
@@ -16,7 +15,6 @@ def GetPresents():
     return results
 
 presents: Present = GetPresents()
-#p3 = Present('3', 'Dragon', 'Sandy')
 
 def getPresents():
     return presents
