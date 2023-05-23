@@ -1,5 +1,13 @@
 from config import ConnectionString
-from objects.present import Present
+
+def AddPresents():
+    conn = ConnectionString.returnConn()
+    conn.autocommit = True
+    cursor = conn.cursor()
+    query = "INSERT INTO presents(ID, NAME, OWNER) VALUES(%s, %s, %s)"
+    recordsToInsert = (2, 'Flower', 'Isaac')
+    cursor.execute(query, recordsToInsert)
+    conn.commit()
 
 def GetPresents():
     conn = ConnectionString.returnConn()
@@ -11,10 +19,10 @@ def GetPresents():
     results = [{columns[index][0]:column for index, column in enumerate(value)} for value in cursor.fetchall()]
 
     conn.commit()
-    conn.close()
     return results
 
-presents: Present = GetPresents()
-
 def getPresents():
-    return presents
+    return GetPresents()
+
+def addPresents():
+    AddPresents()
