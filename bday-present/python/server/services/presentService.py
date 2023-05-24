@@ -1,4 +1,5 @@
 from config import ConnectionString
+from objects.presents import Presents
 
 conn = ConnectionString.returnConn()
 conn.autocommit = True
@@ -27,25 +28,33 @@ def GetPresentById():
     conn.commit()
     return results
 
-def AddPresents():
+def AddPresent():
 
     query = "INSERT INTO presents(ID, NAME, OWNER) VALUES(%s, %s, %s)"
-    recordsToInsert = (2, 'Flower', 'Isaac')
+    recordsToInsert = ('2', 'Flower', 'Isaac')
     cursor.execute(query, recordsToInsert)
     conn.commit()
 
-def DeletePresents():
+    present = { 'Id': '2', 'name': 'Flower', 'Owner': 'Isaac'}
+
+    return present
+
+def DeletePresent():
 
     recordsToInsert = ('2')
     query = "DELETE from presents WHERE id = %s"
     cursor.execute(query, recordsToInsert)
     conn.commit()
 
-def UpdatePresents():
+    return recordsToInsert
+
+def UpdatePresent():
     recordsToInsert = ('Car', '2')
     query = "UPDATE presents SET name = %s WHERE id = %s"
     cursor.execute(query, recordsToInsert)
     conn.commit()
+
+    return recordsToInsert
 
 
 
@@ -55,11 +64,11 @@ def getPresents():
 def getPresentById():
     return GetPresentById()
 
-def addPresents():
-    AddPresents()
+def addPresent():
+    return AddPresent()
 
-def deletePresents():
-    DeletePresents()
+def deletePresent():
+    return DeletePresent()
 
-def updatePresents():
-    UpdatePresents()
+def updatePresent():
+    return UpdatePresent()
