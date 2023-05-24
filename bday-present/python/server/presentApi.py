@@ -13,19 +13,21 @@ def Get():
 
 @app.route('/presents/GetById')
 def GetById():
-    return getPresentById()
+    return getPresentById('2')
 
 @app.route('/presents/Add')
 def Add():
-    return addPresent()
+    recordsToInsert = ('2', 'Flower', 'Isaac')
+    return addPresent(recordsToInsert)
 
 @app.route('/presents/Delete')
 def Delete():
-    return deletePresent()
+    return deletePresent('2')
 
 @app.route('/presents/Update')
 def Update():
-    return updatePresent()
+    recordToInsert = ('Car', '2')
+    return updatePresent(recordToInsert)
 
 #getbyId
 #delete

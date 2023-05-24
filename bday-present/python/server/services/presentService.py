@@ -16,9 +16,9 @@ def GetPresents():
     conn.commit()
     return results
 
-def GetPresentById():
+def GetPresentById(id):
     query = "SELECT * from presents WHERE id = %s"
-    recordsToInsert = ('2')
+    recordsToInsert = (id)
 
     cursor.execute(query, recordsToInsert)
 
@@ -28,47 +28,45 @@ def GetPresentById():
     conn.commit()
     return results
 
-def AddPresent():
+def AddPresent(recordToInsert):
 
     query = "INSERT INTO presents(ID, NAME, OWNER) VALUES(%s, %s, %s)"
-    recordsToInsert = ('2', 'Flower', 'Isaac')
-    cursor.execute(query, recordsToInsert)
+    cursor.execute(query, recordToInsert)
     conn.commit()
 
     present = { 'Id': '2', 'name': 'Flower', 'Owner': 'Isaac'}
 
     return present
 
-def DeletePresent():
+def DeletePresent(id):
 
-    recordsToInsert = ('2')
+    recordsToInsert = (id)
     query = "DELETE from presents WHERE id = %s"
     cursor.execute(query, recordsToInsert)
     conn.commit()
 
     return recordsToInsert
 
-def UpdatePresent():
-    recordsToInsert = ('Car', '2')
+def UpdatePresent(recordToInsert):
     query = "UPDATE presents SET name = %s WHERE id = %s"
-    cursor.execute(query, recordsToInsert)
+    cursor.execute(query, recordToInsert)
     conn.commit()
 
-    return recordsToInsert
+    return recordToInsert
 
 
 
 def getPresents():
     return GetPresents()
 
-def getPresentById():
-    return GetPresentById()
+def getPresentById(id):
+    return GetPresentById(id)
 
-def addPresent():
-    return AddPresent()
+def addPresent(recordToInsert):
+    return AddPresent(recordToInsert)
 
-def deletePresent():
-    return DeletePresent()
+def deletePresent(id):
+    return DeletePresent(id)
 
-def updatePresent():
-    return UpdatePresent()
+def updatePresent(recordToInsert):
+    return UpdatePresent(recordToInsert)
