@@ -36,9 +36,13 @@ export function Get(){
       {divText}
     </div>
   </div>
-    
+
   return (a);
 }
+
+//foreach the html
+//count is added to the id of the html
+//use unique id in get method
 
 
 
