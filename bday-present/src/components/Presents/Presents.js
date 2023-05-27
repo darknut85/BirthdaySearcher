@@ -1,6 +1,5 @@
-import { changeText } from "./PresentService"
+import { Get } from "./PresentService"
 
 export function ViewPresents(){
-    changeText();
-    return <h1>Presents</h1>
+    return Get();
 }
