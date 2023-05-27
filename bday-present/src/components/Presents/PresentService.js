@@ -10,21 +10,32 @@ export function Get(){
   fetch(localhost)
     .then(response => response.json()).then(data => 
       {
-        var par = document.getElementById("idf");
+        var idf = document.getElementById("idf");
+        var idn = document.getElementById("idn");
+        var ido = document.getElementById("ido");
 
         data.forEach(addData)
         function addData(item) 
         {
           const present = new Present(item.id,item.name,item.owner);
-          par.innerText += present.id;
-          par.innerText += present.name;
-          par.innerText += present.owner;
+          idf.innerText += present.id + "\n";
+          idn.innerText += present.name + "\n";
+          ido.innerText += present.owner + "\n";
         };
       }
     );
-  const a = <div id="idf">
-              {divText}
-            </div>
+  const a = 
+  <div>
+    <div id="idf">
+      {divText}
+    </div>
+    <div id="idn">
+      {divText}
+    </div>
+    <div id="ido">
+      {divText}
+    </div>
+  </div>
     
   return (a);
 }
