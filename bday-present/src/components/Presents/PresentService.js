@@ -1,44 +1,29 @@
 import { Present } from "../Objects/Present";
-import { useState } from "react";
+import React, { useEffect, useState } from 'react';
 
-var localhost = 'http://127.0.0.1:5000/presents/Get'
+const restEndpoint = "http://127.0.0.1:5000/presents/Get";
 
-export function Get(){
-  document.body.style.backgroundColor = "red";
-  const[divText] = useState('');
+const callRestApi = async () => {
+    const response = await fetch(restEndpoint);
+    const jsonResponse = await response.json();
+    console.log(jsonResponse);
+    return React.createElement('h1', null, JSON.stringify(jsonResponse));
+};
 
-  fetch(localhost)
-    .then(response => response.json()).then(data => 
-      {
-        var idf = document.getElementById("idf");
-        var idn = document.getElementById("idn");
-        var ido = document.getElementById("ido");
+export function Get() {
+  const [apiResponse, setApiResponse] = useState("*** now loading ***");
 
-        data.forEach(addData)
-        function addData(item) 
-        {
-          const present = new Present(item.id,item.name,item.owner);
-          idf.innerText += present.id + "\n";
-          idn.innerText += present.name + "\n";
-          ido.innerText += present.owner + "\n";
-        };
-      }
-    );
-  const a = 
-  <div>
-    <div id="idf">
-      {divText}
-    </div>
-    <div id="idn">
-      {divText}
-    </div>
-    <div id="ido">
-      {divText}
-    </div>
-  </div>
+  useEffect(() => {
+    callRestApi().then(
+      result => setApiResponse(result));
+  },[]);
 
-  return (a);
-}
+  return (<div>
+          <h1>React App</h1>
+          <p>{apiResponse}</p>
+         </div>
+  );
+};
 
 //foreach the html
 //count is added to the id of the html
