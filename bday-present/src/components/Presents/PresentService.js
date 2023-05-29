@@ -3,14 +3,16 @@ import React, { useEffect, useState } from 'react';
 
 const restEndpoint = "http://127.0.0.1:5000/presents/Get";
 
-const callRestApi = async () => {
+
+
+export function Get() {
+  const callRestApi = async () => {
     const response = await fetch(restEndpoint);
     const jsonResponse = await response.json();
     console.log(jsonResponse);
     return React.createElement('h1', null, JSON.stringify(jsonResponse));
-};
+  };
 
-export function Get() {
   const [apiResponse, setApiResponse] = useState("*** now loading ***");
 
   useEffect(() => {
@@ -19,8 +21,7 @@ export function Get() {
   },[]);
 
   return (<div>
-          <h1>React App</h1>
-          <p>{apiResponse}</p>
+            <div>{apiResponse}</div>
          </div>
   );
 };
