@@ -9,8 +9,12 @@ export function Get() {
   const callRestApi = async () => {
     const response = await fetch(restEndpoint);
     const jsonResponse = await response.json();
-    console.log(jsonResponse);
-    return React.createElement('h1', null, JSON.stringify(jsonResponse));
+
+    const js = JSON.stringify(jsonResponse);
+    const parsed = JSON.parse(js);
+    console.log(parsed);
+
+    return React.createElement('div', null, js);
   };
 
   const [apiResponse, setApiResponse] = useState("*** now loading ***");
@@ -21,7 +25,7 @@ export function Get() {
   },[]);
 
   return (<div>
-            <div>{apiResponse}</div>
+            {apiResponse}
          </div>
   );
 };
