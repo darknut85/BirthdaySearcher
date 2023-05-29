@@ -1,10 +1,8 @@
-import { Present } from "../Objects/Present";
 import React, { useEffect, useState } from 'react';
 
 const restEndpoint = "http://127.0.0.1:5000/presents/Get";
 
-
-
+//get
 export function Get() {
   const callRestApi = async () => {
     const response = await fetch(restEndpoint);
@@ -12,9 +10,14 @@ export function Get() {
 
     const js = JSON.stringify(jsonResponse);
     const parsed = JSON.parse(js);
-    console.log(parsed);
+    const pList = []
+    const presents = <div>{pList}</div>
 
-    return React.createElement('div', null, js);
+    parsed.forEach(element => {
+      pList.push(<div>dd: {element.id}, name: {element.name}, owner: {element.owner}</div>);
+    });
+    console.log(pList);
+    return presents;
   };
 
   const [apiResponse, setApiResponse] = useState("*** now loading ***");
@@ -23,20 +26,12 @@ export function Get() {
     callRestApi().then(
       result => setApiResponse(result));
   },[]);
-
+  
   return (<div>
             {apiResponse}
          </div>
   );
 };
-
-//foreach the html
-//count is added to the id of the html
-//use unique id in get method
-
-
-
-//get
 
 //getbyid
 
