@@ -3,9 +3,10 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
-import { Home } from "../Home/Home";
+import Home from "../Home/Home";
 import { ViewPresents } from "../Presents/Presents";
-import { Sidenav } from "../Sidenav/Sidenav";
+import Sidenav from "../Sidenav/Sidenav";
+import './App.css';
 
 function App() {
   return (

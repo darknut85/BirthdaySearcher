@@ -1,18 +1,27 @@
+import { NavLink } from "react-router-dom";
 import { navData } from "./NavData";
+import React, { useState } from 'react';
+
 import "./Sidenav.css";
 
-export default function Sidenav(){
+function Sidenav(){
+    const [open, setopen] = useState(true);
+
+    const toggleOpen = () => setopen(!open);
+
     return (  
-        <div>
-            <button className="menuBtn">
+        <div className= {open?"sidenav":"sidenaveClosed"}>
+            <button className="menuBtn" onClick={toggleOpen}>
                 Click me
             </button>
                 {navData.map(item =>{
-                    return <div key={item.id} className="sideitem">
-            {item.icon}
-            <span className="linkText">{item.text}</span>
-            </div>
+                    return <NavLink key={item.id} className="sideitem" to={item.link}>
+                {item.icon}
+                <span className="linkText">{item.text}</span>
+            </NavLink>
             })}
         </div>
     );
 }
+
+export default Sidenav;

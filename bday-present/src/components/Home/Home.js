@@ -1,9 +1,9 @@
 import './Home.css';
 
-export function Home() {
+export default function Home() {
     return (
-        <div className="App">
-        <header className="App-header">
+        <div className="Home">
+        <header className="Home-header">
             <p>
             Home Page
             </p>

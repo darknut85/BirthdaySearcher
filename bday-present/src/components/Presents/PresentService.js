@@ -16,7 +16,6 @@ export function Get() {
     parsed.forEach(element => {
       pList.push(<div>dd: {element.id}, name: {element.name}, owner: {element.owner}</div>);
     });
-    console.log(pList);
     return presents;
   };
 
