@@ -1,5 +1,4 @@
 from config import ConnectionString
-from objects.presents import Presents
 
 conn = ConnectionString.returnConn()
 conn.autocommit = True
