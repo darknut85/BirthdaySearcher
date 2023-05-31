@@ -14,7 +14,7 @@ export function Get() {
     const presents = <div>{pList}</div>
 
     parsed.forEach(element => {
-      pList.push(<div>dd: {element.id}, name: {element.name}, owner: {element.owner}</div>);
+      pList.push(<div>id: {element.id}, name: {element.name}, owner: {element.owner}</div>);
     });
     return presents;
   };

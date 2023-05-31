@@ -8,7 +8,10 @@
  
 .sidenavClosed {
     transition: width 0.3s ease-in-out;
-    width: 60px
+    background-color: rgb(10,25,41);
+    width: 80px;
+    padding-top: 28px;
+    height: 100vh;
 }
  
 .sideitem {

@@ -10,14 +10,14 @@ function Sidenav(){
     const toggleOpen = () => setopen(!open);
 
     return (  
-        <div className= {open?"sidenav":"sidenaveClosed"}>
+        <div className= {open?"sidenav":"sidenavClosed"}>
             <button className="menuBtn" onClick={toggleOpen}>
-                Click me
+                Toggle sidenav
             </button>
                 {navData.map(item =>{
                     return <NavLink key={item.id} className="sideitem" to={item.link}>
                 {item.icon}
-                <span className="linkText">{item.text}</span>
+                <span className={open?"linkText":"linkTextClosed"}>{item.text}</span>
             </NavLink>
             })}
         </div>
