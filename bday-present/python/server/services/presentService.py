@@ -1,55 +1,50 @@
 from config import ConnectionString
 
-conn = ConnectionString.returnConn()
-conn.autocommit = True
-cursor = conn.cursor()
+def connectionString():
+    conn = ConnectionString.returnConn()
+    conn.autocommit = True
+    return conn
 
 def GetPresents():
 
-    query = '''SELECT * from presents'''
-    cursor.execute(query)
+    cs = connectionString.cursor()
+    cs.execute('''SELECT * from presents''')
 
-    columns = cursor.description
+    columns = cs.description
     results = [{columns[index][0]:column for index, column in enumerate(value)} for value in cursor.fetchall()]
-
-    conn.commit()
     return results
 
 def GetPresentById(id):
-    query = "SELECT * from presents WHERE id = %s"
     recordsToInsert = (id)
 
-    cursor.execute(query, recordsToInsert)
+    cs = connectionString.cursor()
+    cs.execute("SELECT * from presents WHERE id = %s", recordsToInsert)
 
-    columns = cursor.description
+    columns = cs.description
     results = [{columns[index][0]:column for index, column in enumerate(value)} for value in cursor.fetchall()]
-    print(results)
-    conn.commit()
     return results
 
 def AddPresent(recordToInsert):
-
-    query = "INSERT INTO presents(ID, NAME, OWNER) VALUES(%s, %s, %s)"
-    cursor.execute(query, recordToInsert)
-    conn.commit()
+    cs = connectionString.cursor()
+    cs.execute("INSERT INTO presents(ID, NAME, OWNER) VALUES(%s, %s, %s)", recordToInsert)
+    cs.commit()
 
     present = { 'Id': '2', 'name': 'Flower', 'Owner': 'Isaac'}
 
     return present
 
 def DeletePresent(id):
-
+    cs = connectionString.cursor()
     recordsToInsert = (id)
-    query = "DELETE from presents WHERE id = %s"
-    cursor.execute(query, recordsToInsert)
-    conn.commit()
+    cs.execute("DELETE from presents WHERE id = %s", recordsToInsert)
+    cs.commit()
 
     return recordsToInsert
 
 def UpdatePresent(recordToInsert):
-    query = "UPDATE presents SET name = %s WHERE id = %s"
-    cursor.execute(query, recordToInsert)
-    conn.commit()
+    cs = connectionString.cursor()
+    cs.execute("UPDATE presents SET name = %s WHERE id = %s", recordToInsert)
+    cs.commit()
 
     return recordToInsert
 
