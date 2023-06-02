@@ -1,5 +1,5 @@
+import services.presentService
 from flask_cors import CORS
-from services.presentService import addPresent, getPresents, deletePresent, updatePresent, getPresentById
 from main import start
 
 app = start()
@@ -9,26 +9,22 @@ CORS(app)
 
 @app.route('/presents/Get')
 def Get():
-    return getPresents()
+    return services.presentService.Get.GetPresents()
 
 @app.route('/presents/GetById')
 def GetById():
-    return getPresentById('2')
+    return services.presentService.Get.GetPresentById('2')
 
 @app.route('/presents/Add')
 def Add():
     recordsToInsert = ('2', 'Flower', 'Isaac')
-    return addPresent(recordsToInsert)
+    return services.presentService.Get.AddPresent(recordsToInsert)
 
 @app.route('/presents/Delete')
 def Delete():
-    return deletePresent('2')
+    return services.presentService.Get.DeletePresent('2')
 
 @app.route('/presents/Update')
 def Update():
     recordToInsert = ('Car', '2')
-    return updatePresent(recordToInsert)
-
-#getbyId
-#delete
-#update
+    return services.presentService.Get.UpdatePresent(recordToInsert)
