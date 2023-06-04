@@ -1,24 +1,19 @@
+import psycopg2
 import config
 
 class Get:
-
-    def connectionString():
-            conn = config.ConnectionString.returnConn()
-            conn.autocommit = True
-            return conn.cursor()
-
     def GetPresents():
-        cs = Get.connectionString()
-        cs.execute('''SELECT * from presents''')
-
-        columns = cs.description
-        results = [{columns[index][0]:column for index, column in enumerate(value)} for value in cs.fetchall()]
-        return results
+        with psycopg2.connect(database="birthdayPresent", user='postgres', password='Soraheliatos2@', host='127.0.0.1', port= '1700') as conn:
+            with conn.cursor() as cursor:
+                cursor.execute('SELECT * from presents')
+                columns = cursor.description
+                results = [{columns[index][0]:column for index, column in enumerate(value)} for value in cursor.fetchall()]
+                return results
 
     def GetPresentById(id):
         recordsToInsert = (id)
 
-        cs = Get.connectionString
+        cs = config.ConnectionString.returnConn()
         cs.execute("SELECT * from presents WHERE id = %s", recordsToInsert)
 
         columns = cs.description
@@ -26,26 +21,23 @@ class Get:
         return results
 
     def AddPresent(recordToInsert):
-        cs = Get.connectionString
+        cs = config.ConnectionString.returnConn()
         cs.execute("INSERT INTO presents(ID, NAME, OWNER) VALUES(%s, %s, %s)", recordToInsert)
-        cs.commit()
 
         present = { 'Id': '2', 'name': 'Flower', 'Owner': 'Isaac'}
 
         return present
 
     def DeletePresent(id):
-        cs = Get.connectionString
+        cs = config.ConnectionString.returnConn()
         recordsToInsert = (id)
         cs.execute("DELETE from presents WHERE id = %s", recordsToInsert)
-        cs.commit()
 
         return recordsToInsert
 
     def UpdatePresent(recordToInsert):
-        cs = Get.connectionString
+        cs = config.ConnectionString.returnConn()
         cs.execute("UPDATE presents SET name = %s WHERE id = %s", recordToInsert)
-        cs.commit()
 
         return recordToInsert
 
